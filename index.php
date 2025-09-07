@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (empty($_SESSION['csrf'])) {
+    $_SESSION['csrf'] = bin2hex(random_bytes(32));
+}
 $dbFile = __DIR__ . '/bookmarks.sqlite';
 $pdo = new PDO('sqlite:' . $dbFile);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -12,6 +16,9 @@ $pdo->exec('CREATE TABLE IF NOT EXISTS bookmarks (
 )');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!hash_equals($_SESSION['csrf'], $_POST['csrf'] ?? '')) {
+        exit('Invalid CSRF token');
+    }
     if (isset($_POST['add'])) {
         $section = trim($_POST['section']);
         $title = trim($_POST['title']);
@@ -71,6 +78,7 @@ if (isset($_GET['edit'])) {
                 <li>
                     <a href="<?= htmlspecialchars($item['url']) ?>"><?= htmlspecialchars($item['title']) ?></a>
                     <form method="post" class="inline">
+                        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
                         <input type="hidden" name="id" value="<?= $item['id'] ?>">
                         <button type="submit" name="delete">Delete</button>
                     </form>
@@ -83,6 +91,7 @@ if (isset($_GET['edit'])) {
     <?php if ($editBookmark): ?>
         <h2>Edit Bookmark</h2>
         <form method="post">
+            <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
             <input type="hidden" name="id" value="<?= $editBookmark['id'] ?>">
             <input type="text" name="section" value="<?= htmlspecialchars($editBookmark['section']) ?>" placeholder="Section" required>
             <input type="text" name="title" value="<?= htmlspecialchars($editBookmark['title']) ?>" placeholder="Title" required>
@@ -93,6 +102,7 @@ if (isset($_GET['edit'])) {
 
     <h2>Add Bookmark</h2>
     <form method="post">
+        <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
         <input type="text" name="section" placeholder="Section" required>
         <input type="text" name="title" placeholder="Title" required>
         <input type="url" name="url" placeholder="URL" required>
