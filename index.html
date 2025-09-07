@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookmark Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Bookmarks</h1>
+    <div id="sections"></div>
+
+    <section id="add-section">
+        <h2>Add Bookmark</h2>
+        <form id="add-form">
+            <label>Section
+                <input type="text" id="section-input" required>
+            </label>
+            <label>Title
+                <input type="text" id="title-input" required>
+            </label>
+            <label>URL
+                <input type="url" id="url-input" required>
+            </label>
+            <button type="submit">Add</button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
