@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!hash_equals($_SESSION['csrf'], $_POST['csrf'] ?? '')) {
         exit('Invalid CSRF token');
     }
+    $_SESSION['csrf'] = bin2hex(random_bytes(32));
     if (isset($_POST['add'])) {
         $section = trim($_POST['section']);
         $title = trim($_POST['title']);
