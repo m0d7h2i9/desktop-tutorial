@@ -1,7 +1,6 @@
-# Welcome to GitHub Desktop!
+# Bookmark Collection
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+A simple static site that organizes bookmarks into named sections.
+Each bookmark can be added, edited, or removed directly from the page.
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
-
-testing readme
+Open `index.html` in your browser to use the bookmark manager.
