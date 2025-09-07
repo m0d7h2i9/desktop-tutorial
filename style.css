@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+}
+
+h2 {
+    margin-top: 2rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.25rem;
+}
+
+ol {
+    padding-left: 1.5rem;
+}
+
+li {
+    margin: 0.25rem 0;
+}
+
+form.inline {
+    display: inline;
+}
